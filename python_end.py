@@ -1,5 +1,6 @@
 import numpy as np
 import paho.mqtt.client as mqtt
+import time
 
 import packet_pb2
 
@@ -31,7 +32,7 @@ def to_proto_bytes(obj: MyData) -> bytes:
 
 
 def publish_example(broker_host="127.0.0.1", topic="demo/packet"):
-    arr = (np.random.rand(4, 3).astype(np.float32) * 10.0)
+    arr = (np.random.rand(50, 1000).astype(np.float32) * 10.0)
 
     data = MyData(
         id="run-001",
@@ -44,7 +45,13 @@ def publish_example(broker_host="127.0.0.1", topic="demo/packet"):
 
     client = mqtt.Client()
     client.connect(broker_host, 1883, 60)
-    client.publish(topic, payload, qos=1)
+    client.loop_start()
+    t0 = time.perf_counter_ns()
+    info = client.publish(topic, payload, qos=1)
+    info.wait_for_publish()
+    dt_ms = (time.perf_counter_ns() - t0) * 1e-6
+    print(f"publish+ack: {dt_ms:.2f} ms")
+    client.loop_stop()
     client.disconnect()
 
     print(f"Published {len(payload)} bytes to {topic}")
