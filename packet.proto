@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package demo;
+
+message ArrayPayload {
+  //metadata to reconstruct numpy array
+  repeated int32 shape = 1;     //e.g., [rows, cols]
+  string dtype = 2;             //e.g., "float32"
+  bytes data = 3;               //raw bytes (C-order)
+}
+
+message Packet {
+  string id = 1;
+  string label = 2;
+  ArrayPayload array = 3;
+
+  //NOTE: omitted attribute here as well
+}
