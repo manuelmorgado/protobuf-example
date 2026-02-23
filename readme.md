@@ -236,6 +236,26 @@ Make sure a broker is running locally:
 mosquitto -p 1883
 ```
 
+### E) Maybe array missing
+
+To ensure that the array is publish by python or cpp you can use a monitor of mosquitto as:
+```bash
+mosquitto_sub -h localhost -t demo/packet -C 1 | wc -c
+```
+
+### F) Too many MQTT brokers open (e.g., 1883/1884)
+
+One can check a log of the mosquitto service:
+```bash
+sudo tail -f /var/log/mosquitto/mosquitto.log
+```
+where new pub/rcv will be shown up. They can be closed (ubuntu) with:
+```bash
+sudo snap stop mosquitto
+```
+and try again.
+
+
 ------------------------------------------------------------------------
 
 ## 5. Makefile
@@ -286,6 +306,10 @@ Protobuf tutorials:
 
 Protobuf git:
    https://github.com/protocolbuffers/protobuf/blob/main/cmake/README.md
+   
+Other tutorials:
+   https://victoriametrics.com/blog/go-protobuf-basic/
+   https://medium.com/@staytechrich/protocol-buffers-tutorial-part-1-getting-started-with-protobuf-basics-17585e53c9e4
    
 Other tutorials:
    https://victoriametrics.com/blog/go-protobuf-basic/
