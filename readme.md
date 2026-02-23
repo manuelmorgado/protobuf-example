@@ -1,4 +1,4 @@
-# Protobuf + C++ (Mosquitto) Build Instructions (Ubuntu + Conda)
+# Protobuf: C++ <-> Python (via MQTT)
 
 Minimal end-to-end example of serializing a Protocol Buffers message in Python, publishing it over MQTT, and receiving and decoding it in C++.
 
@@ -8,17 +8,19 @@ The message schema is defined in packet.proto:
   - Python acts as the publisher.
   - C++ acts as the subscriber.
 
+```
 ./
 ├── packet.proto
 ├── cpp_end.cpp
 ├── python_end.py
 ├── readme.md
+```
 
 Tested on:
 
   Ubuntu 22.04
-  ├── GCC ≥ 11
-  ├── Conda (Miniconda or Anaconda
+  - GCC ≥ 11
+  - Conda (Miniconda or Anaconda
 
 
   
