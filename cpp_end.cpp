@@ -68,7 +68,7 @@ int main()
 
     mosquitto_message_callback_set(mosq, on_message);
 
-    int rc = mosquitto_connect(mosq, "127.0.0.1", 1883, 60);
+    int rc = mosquitto_connect(mosq, "127.0.0.1", 1884, 60);
     if (rc != MOSQ_ERR_SUCCESS) {
         std::cerr << "mosquitto_connect failed: " << rc << "\n";
         return 1;
